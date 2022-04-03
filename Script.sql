@@ -17,7 +17,7 @@ create table if not exists ExecutorGenre(
 create table if not exists albums(
 	id_album serial primary key,
 	name_album varchar(50) not null,
-	release_date date not null
+	release_date integer not null
 	);
 
 create table if not exists ExecutorAlbums(
@@ -36,7 +36,12 @@ create table if not exists tracks(
 create table if not exists Collection(
 	id_collection serial primary key,
 	id_track integer references tracks(id_track),
-	id_album integer references albums (id_album),
 	name_collection varchar(50) not null,
 	data_collecion date not null
 	);
+
+create table if not exists track_collection(
+	id_track_collection serial primary key,
+	id_track integer references tracks(id_track),
+	id_collection integer references Collection(id_collection)
+);
